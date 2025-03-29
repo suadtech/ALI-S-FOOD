@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content text-center">
+        <h1 class="display-4">Welcome to ALI'S FOOD</h1>
+        <p class="lead">Experience the finest cuisine in town</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'create_reservation' %}" class="btn btn-primary btn-lg">Make a Reservation</a>
+        {% else %}
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Register to Book a Table</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <h3>Our Menu</h3>
+        <p>Discover our delicious dishes prepared with the freshest ingredients.</p>
+        <a href="{% url 'menu' %}" class="btn btn-outline-secondary">View Menu</a>
+    </div>
+    <div class="col-md-4">
+        <h3>Opening Hours</h3>
+        <p>Monday - Friday: 11:00 - 22:00<br>
+        Saturday - Sunday: 10:00 - 23:00</p>
+    </div>
+    <div class="col-md-4">
+        <h3>Contact Us</h3>
+        <p>123 Food Street<br>
+        Foodville, FK 12345<br>
+        Phone: (123) 456-7890</p>
+    </div>
+</div>
+{% endblock %}
