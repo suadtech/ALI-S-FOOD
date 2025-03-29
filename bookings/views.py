@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from .models import Reservation, Table, Customer, Menu
+from .models import Menu
 from .forms import ReservationForm, UserRegisterForm
 from datetime import datetime, date, time
 
@@ -99,6 +100,24 @@ def cancel_reservation(request, pk):
         return redirect('reservation_list')
     return render(request, 'reservations/cancel.html', {'reservation': reservation})
 
-def menu(request):
-    menu_items = Menu.objects.filter(is_available=True)
-    return render(request, 'menu.html', {'menu_items': menu_items})
+def view_menu(request):
+    """View to display the restaurant menu"""
+    # Get all available menu items
+    menu_items = Menu.objects.filter(is_available=True).order_by('category', 'name')
+    
+    # Organize by categories
+    categories = {
+        'APP': {'name': 'Appetizers', 'items': []},
+        'MAIN': {'name': 'Main Courses', 'items': []},
+        'DESS': {'name': 'Desserts', 'items': []},
+        'BEV': {'name': 'Beverages', 'items': []},
+    }
+    
+    # Sort items into categories
+    for item in menu_items:
+        categories[item.category]['items'].append(item)
+    
+    # Pass to template
+    return render(request, 'bookings/menu.html', {
+        'categories': categories
+    })

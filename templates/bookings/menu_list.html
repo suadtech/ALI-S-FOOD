@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}Menu - ALI'S FOOD{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Our Menu</h1>
+    
+    <!-- Appetizers -->
+    <div class="menu-category mb-5">
+        <h2 class="category-title mb-4">Appetizers</h2>
+        <div class="row">
+            {% for item in menu_items %}
+                {% if item.category == 'APP' %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 menu-item">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ item.name }}</h3>
+                            <p class="card-text">{{ item.description }}</p>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">${{ item.price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Main Courses -->
+    <div class="menu-category mb-5">
+        <h2 class="category-title mb-4">Main Courses</h2>
+        <div class="row">
+            {% for item in menu_items %}
+                {% if item.category == 'MAIN' %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 menu-item">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ item.name }}</h3>
+                            <p class="card-text">{{ item.description }}</p>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">${{ item.price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Desserts -->
+    <div class="menu-category mb-5">
+        <h2 class="category-title mb-4">Desserts</h2>
+        <div class="row">
+            {% for item in menu_items %}
+                {% if item.category == 'DESS' %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 menu-item">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ item.name }}</h3>
+                            <p class="card-text">{{ item.description }}</p>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">${{ item.price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Beverages -->
+    <div class="menu-category mb-5">
+        <h2 class="category-title mb-4">Beverages</h2>
+        <div class="row">
+            {% for item in menu_items %}
+                {% if item.category == 'BEV' %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 menu-item">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ item.name }}</h3>
+                            <p class="card-text">{{ item.description }}</p>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">${{ item.price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
