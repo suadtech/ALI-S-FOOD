@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Menu - ALI'S FOOD{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-5">Our Menu</h1>
+    
+    {% for category, items in menu_by_category.items %}
+    <div class="menu-section mb-5">
+        <h2 class="section-title mb-4">{{ category }}</h2>
+        <div class="row">
+            {% for item in items %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card menu-item h-100">
+                    <div class="card-body">
+                        <h3 class="item-name">{{ item.name }}</h3>
+                        <p class="item-description">{{ item.description }}</p>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="item-price">${{ item.price }}</span>
+                            {% if item.is_available %}
+                            <span class="badge bg-success">Available</span>
+                            {% else %}
+                            <span class="badge bg-secondary">Unavailable</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

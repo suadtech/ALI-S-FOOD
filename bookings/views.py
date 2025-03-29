@@ -101,23 +101,19 @@ def cancel_reservation(request, pk):
     return render(request, 'reservations/cancel.html', {'reservation': reservation})
 
 def view_menu(request):
-    """View to display the restaurant menu"""
-    # Get all available menu items
     menu_items = Menu.objects.filter(is_available=True).order_by('category', 'name')
     
-    # Organize by categories
     categories = {
-        'APP': {'name': 'Appetizers', 'items': []},
-        'MAIN': {'name': 'Main Courses', 'items': []},
-        'DESS': {'name': 'Desserts', 'items': []},
-        'BEV': {'name': 'Beverages', 'items': []},
+        'APP': 'Appetizers',
+        'MAIN': 'Main Courses',
+        'DESS': 'Desserts',
+        'BEV': 'Beverages'
     }
     
-    # Sort items into categories
-    for item in menu_items:
-        categories[item.category]['items'].append(item)
+    menu_by_category = {}
+    for code, name in categories.items():
+        items = menu_items.filter(category=code)
+        if items.exists():
+            menu_by_category[name] = items
     
-    # Pass to template
-    return render(request, 'bookings/menu.html', {
-        'categories': categories
-    })
+    return render(request, 'bookings/menu.html', {'menu_by_category': menu_by_category})
